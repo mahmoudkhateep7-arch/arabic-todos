@@ -94,7 +94,9 @@ export const cbbb = (
   const month = c_month || now_t.getMonth() + 1;
   const day = c_day || now_t.getDate();
   const second = s || now_t.getSeconds();
-  const hour = h || now_t.getHours() + 1;
+  const hour = h || now_t.getHours() % 12;
+  console.log(hour);
+
   console.log(hour);
 
   const obj: I_confug_obj = {
