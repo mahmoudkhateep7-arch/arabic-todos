@@ -9,6 +9,7 @@ export const obj_2_vs: {
   edit_mode: boolean;
   editing_idx: number;
   span_target: null | HTMLElement;
+  shoud_scale_up: boolean;
 } = {
   parent_div: null,
   v: "",
@@ -16,6 +17,7 @@ export const obj_2_vs: {
   edit_mode: false,
   editing_idx: -2,
   span_target: null,
+  shoud_scale_up: true,
 };
 export const c_back_fn = (e: PointerEvent) => {
   const add_div = document.querySelector<HTMLDivElement>("#add_el")!;

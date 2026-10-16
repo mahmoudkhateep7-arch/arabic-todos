@@ -15,6 +15,7 @@ export const handle_submit_fn = () => {
   //
   form_1_el.addEventListener("submit", (e) => {
     e.preventDefault();
+
     const form_data = new FormData(form_1_el);
     const title_v = form_data.get("title");
     const desc_v = form_data.get("desc");
@@ -29,6 +30,20 @@ export const handle_submit_fn = () => {
     const fixed_form_1 =
       document.querySelector<HTMLDivElement>("#fixed_form_1")!;
     const grid_el = document.querySelector<HTMLDivElement>("#grid_el")!;
+    console.log("manan .a.a..a.a.a..");
+    console.log(obj_2_vs.editing_idx);
+    if (obj_2_vs.editing_idx >= 0) {
+      if (
+        confug_obj.arr[obj_2_vs.editing_idx].desc.trim() == f_desc.trim() &&
+        confug_obj.arr[obj_2_vs.editing_idx].title.trim() == f_title.trim()
+      ) {
+        obj_2_vs.shoud_scale_up = false;
+      } else {
+        obj_2_vs.shoud_scale_up = true;
+      }
+    }
+
+    console.log("..........");
 
     // clear
     form_1_el.reset();
@@ -42,37 +57,43 @@ export const handle_submit_fn = () => {
         const title_h4 = parent_dvv?.querySelector<HTMLHeadElement>("h4");
         const timing_div =
           parent_dvv?.querySelector<HTMLDivElement>("#timing_div");
+        if (f_desc)
+          if (obj_2_vs.shoud_scale_up) {
+            if (desc_p && title_h4 && timing_div) {
+              title_h4.textContent = f_title;
+              desc_p.textContent = f_desc;
+              const now_t = new Date();
+              const y = now_t.getFullYear();
+              const month = now_t.getMonth() + 1;
+              const day = now_t.getDate();
+              const second = now_t.getSeconds();
+              const hour = now_t.getHours() + 1;
+              confug_obj.arr[obj_2_vs.editing_idx].title = f_title;
+              confug_obj.arr[obj_2_vs.editing_idx].desc = f_desc;
+              confug_obj.arr[obj_2_vs.editing_idx].y = String(y);
+              confug_obj.arr[obj_2_vs.editing_idx].month = String(month);
+              confug_obj.arr[obj_2_vs.editing_idx].day = String(day);
+              confug_obj.arr[obj_2_vs.editing_idx].second = String(second);
+              confug_obj.arr[obj_2_vs.editing_idx].h = String(hour);
+              console.log(confug_obj.arr[obj_2_vs.editing_idx]);
+              timing_div.textContent = `${second}-${hour}-${y}-${month} -:- ${day}`;
+            }
 
-        if (desc_p && title_h4 && timing_div) {
-          title_h4.textContent = f_title;
-          desc_p.textContent = f_desc;
-          const now_t = new Date();
-          const y = now_t.getFullYear();
-          const month = now_t.getMonth() + 1;
-          const day = now_t.getDate();
-          const second = now_t.getSeconds();
-          const hour = now_t.getHours() + 1;
-          confug_obj.arr[obj_2_vs.editing_idx].title = f_title;
-          confug_obj.arr[obj_2_vs.editing_idx].desc = f_desc;
-          confug_obj.arr[obj_2_vs.editing_idx].y = String(y);
-          confug_obj.arr[obj_2_vs.editing_idx].month = String(month);
-          confug_obj.arr[obj_2_vs.editing_idx].day = String(day);
-          confug_obj.arr[obj_2_vs.editing_idx].second = String(second);
-          confug_obj.arr[obj_2_vs.editing_idx].h = String(hour);
-          console.log(confug_obj.arr[obj_2_vs.editing_idx]);
-          timing_div.textContent = `${second}-${hour}-${y}-${month} -:- ${day}`;
-        }
-
-        gsap.fromTo(
-          parent_dvv,
-          { opacity: 0, scale: 0.6 },
-          { opacity: 1, duration: 0.8, scale: 1 },
-        );
+            gsap.fromTo(
+              parent_dvv,
+              { opacity: 0, scale: 0.6 },
+              { opacity: 1, duration: 0.8, scale: 1 },
+            );
+            const audio = document.querySelector("audio")!;
+            audio.play();
+          }
         obj_2_vs.edit_mode = false;
         obj_2_vs.e_v = "";
         obj_2_vs.editing_idx = -1;
       } else {
         cbbb(f_title, f_desc, grid_el);
+        const audio = document.querySelector("audio")!;
+        audio.play();
       }
       localStorage.setItem("arr", JSON.stringify(confug_obj.arr));
     });
@@ -95,9 +116,6 @@ export const cbbb = (
   const day = c_day || now_t.getDate();
   const second = s || now_t.getSeconds();
   const hour = h || now_t.getHours() % 12;
-  console.log(hour);
-
-  console.log(hour);
 
   const obj: I_confug_obj = {
     id: Math.random(),
