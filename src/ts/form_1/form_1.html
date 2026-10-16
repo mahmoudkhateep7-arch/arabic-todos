@@ -1,0 +1,29 @@
+<div id="fixed_form_1"
+  class="px-4 z-100 fixed  hidden  top-0 h-screen left-0 right-0  justify-center items-center sm:px-8 md:px-12 xl:px-20 bg-[#070505a4]">
+  <div class="p-6 rounded-2xl  w-full  max-w-2xl bg-[#414747f0] ">
+    <div class="flex justify-between items-center gap-10 pb-8">
+      <h4 id="form_h4" class="text-xl font-semibold capitalize">أضف ملاحظة جديدة هنا</h4>
+      <div id="del_x" class="cursor-pointer">
+        <span class="iconify size-6 md:size-8" data-icon="mdi:remove"></span>
+
+      </div>
+    </div>
+
+    <form>
+      <div class="flex flex-col gap-5">
+        <div class="flex flex-col gap-1">
+          <label for="title" class="text-2xl capitalize">العنوان</label>
+          <input class="border outline-0 p-2 text-xl" type="text" id="title" name="title">
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="desc" class="text-2xl capitalize">الوصف</label>
+          <textarea class="border outline-0 min-h-40 resize-none p-2 text-xl" name="desc" id="desc"></textarea>
+        </div>
+        <button type="submit" class="text-3xl outline-0 p-2 cursor-pointer bg-[#2e2723] capitalize font-semibold">
+          إضافة</button>
+
+      </div>
+    </form>
+  </div>
+
+</div>
